@@ -1,14 +1,16 @@
 const buildOptions = (method, payload) => {
+  console.log("BLAND_API_KEY:", process.env.BLAND_API_KEY); // Debugging
+
   const options = {
     method,
     headers: {
-      authorization: process.env.BLAND_API_KEY,
+      authorization: process.env.BLAND_API_KEY, // Ensure this is set
       'Content-Type': 'application/json',
     },
   }
 
   if (payload) {
-    options.body = JSON.stringify(payload)
+    options.body = JSON.stringify(payload);
   }
 
   return options
@@ -23,12 +25,9 @@ const buildBatchCallsData = (payload) => {
   }))
 
   const batchCallsData = {
-    base_prompt:
-      'You are calling {{company_name}} to inform {{person_name}} about their outstanding balance of {{balance_outstanding}}.',
     call_data: callData,
-    voice: '95bd81a6-4e9e-4d8d-b7d6-29b7af2fffa0', // 'Cailee',
+    voice: 'Cailee', // 'Cailee',
     background_track: 'office',
-    wait_for_greeting: true,
     pathway_id: process.env.PATHWAY_ID,
   }
 
